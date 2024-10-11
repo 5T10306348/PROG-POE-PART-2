@@ -4,6 +4,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using System.Security.Cryptography;
 using System.Text;
+using Microsoft.AspNetCore.Identity;
+using Azure;
+using System.Diagnostics;
 
 namespace CMCS.Controllers
 {
@@ -27,10 +30,38 @@ namespace CMCS.Controllers
         {
             if (ModelState.IsValid)
             {
-                var passwordHash = HashPassword(model.Password);
-                await _tableService.RegisterUserAsync(model.Email, passwordHash, "Lecturer");
-                return RedirectToAction("Login");
+                var hashedPassword = HashPassword(model.Password); // Hash the password
+
+                // Create a new user entity, including the full name
+                var userEntity = new UserEntity(model.Email, "User", model.FullName)
+                {
+                    PasswordHash = hashedPassword,
+                };
+
+                try
+                {
+                    // Attempt to insert the user
+                    var isUserInserted = await _tableService.InsertUserAsync(userEntity);
+                    if (!isUserInserted)
+                    {
+                        // Show an error message in the email field
+                        ModelState.AddModelError("Email", "This email is already registered.");
+                        return View(model);
+                    }
+
+                    // Store the user's full name in the session
+                    HttpContext.Session.SetString("FullName", model.FullName);
+                    HttpContext.Session.SetString("UserId", model.Email);
+
+                    return RedirectToAction("Index", "Home");
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError(string.Empty, "An error occurred during registration. Please try again.");
+                    return View(model);
+                }
             }
+
             return View(model);
         }
 
@@ -45,37 +76,62 @@ namespace CMCS.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await _tableService.GetUserByEmailAsync(model.Email);
-                if (user != null && VerifyPassword(model.Password, user["PasswordHash"].ToString()))
+                // Retrieve the user from Azure Table by email (RowKey)
+                var userEntity = await _tableService.GetUserByEmailAsync(model.Email);
+
+                if (userEntity != null && VerifyPassword(model.Password, userEntity.PasswordHash))
                 {
-                    // Set session values
-                    HttpContext.Session.SetString("UserId", user.RowKey);
-                    HttpContext.Session.SetString("Role", user["Role"].ToString());
+                    // Store the user's full name, email, and role in the session
+                    HttpContext.Session.SetString("FullName", userEntity.FullName);
+                    HttpContext.Session.SetString("UserId", model.Email);
+                    HttpContext.Session.SetString("Role", userEntity.PartitionKey); // Assuming PartitionKey stores the role
 
                     return RedirectToAction("Index", "Home");
                 }
+
                 ModelState.AddModelError(string.Empty, "Invalid login attempt.");
             }
+
             return View(model);
         }
 
         private string HashPassword(string password)
         {
-            using var sha256 = SHA256.Create();
-            return Convert.ToBase64String(sha256.ComputeHash(Encoding.UTF8.GetBytes(password)));
+            using (var sha256 = SHA256.Create())
+            {
+                var bytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+                var builder = new StringBuilder();
+                foreach (var b in bytes)
+                {
+                    builder.Append(b.ToString("x2"));
+                }
+                return builder.ToString();
+            }
         }
 
         private bool VerifyPassword(string enteredPassword, string storedHash)
         {
-            var enteredHash = HashPassword(enteredPassword);
-            return storedHash == enteredHash;
+            var enteredPasswordHash = HashPassword(enteredPassword);
+            return enteredPasswordHash == storedHash;
         }
 
         [HttpPost]
-        public async Task<IActionResult> Logout()
+        public IActionResult Logout()
         {
-            HttpContext.Session.Clear();
-            return RedirectToAction("Index", "Home");
+            try
+            {
+                // Clear all session variables
+                HttpContext.Session.Clear();
+
+                // Redirect to the login page after logout
+                return RedirectToAction("Login", "Account");
+            }
+            catch (Exception ex)
+            {
+                // Log the error if necessary
+                // Return an error page or message
+                return View("Error", new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            }
         }
     }
 }

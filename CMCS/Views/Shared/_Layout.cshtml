@@ -17,8 +17,9 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                <div class="collapse navbar-collapse">
+                    <!-- Left-aligned navigation links -->
+                    <ul class="navbar-nav me-auto">
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
@@ -35,6 +36,9 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Claims" asp-action="ViewClaims">View All Claims</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Claims" asp-action="TrackClaims">Track My Claims</a>
+                            </li>
 
                             <!-- Show the Lecturer tab if the user has the Lecturer role -->
                             @if (Context.Session.GetString("Role") == "Lecturer")
@@ -43,17 +47,25 @@
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Lecturer" asp-action="Dashboard">Lecturer Dashboard</a>
                                 </li>
                             }
+                        }
+                    </ul>
 
-                            <!-- Logout button -->
+                    <!-- Right-aligned Welcome/Logout or Login/Register -->
+                    <ul class="navbar-nav ms-auto">
+                        <!-- If user is logged in, show welcome and logout -->
+                        @if (Context.Session.GetString("UserId") != null)
+                        {
                             <li class="nav-item">
-                                <form class="form-inline" asp-controller="Account" asp-action="Logout" method="post">
-                                    <button type="submit" class="btn nav-link text-dark bg-transparent border-0">Logout</button>
+                                <span class="nav-link">Welcome back, @Context.Session.GetString("FullName")!</span>
+                            </li>
+                            <li class="nav-item">
+                                <form asp-controller="Account" asp-action="Logout" method="post" class="form-inline">
+                                    <button type="submit" class="nav-link text-dark bg-transparent border-0">Logout</button>
                                 </form>
                             </li>
                         }
                         else
                         {
-                            <!-- Show Login/Register for non-authenticated users -->
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
                             </li>

@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using CMCS.Models;
-using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace CMCS.Controllers
 {
@@ -39,12 +39,10 @@ namespace CMCS.Controllers
             {
                 foreach (var file in UploadedFiles)
                 {
-                    // Upload the file and get both the file name and URL
                     var (fileName, fileUrl) = await _fileService.UploadFileAsync(file);
                     fileData.Add($"{fileName}|{fileUrl}"); // Store fileName|fileUrl format
                 }
 
-                // Store the claim details, including the file names and URLs
                 await _tableService.SubmitClaimAsync(userId, model.HoursWorked, model.HourlyRate, model.ExtraNotes, string.Join(",", fileData));
             }
             else
@@ -56,7 +54,7 @@ namespace CMCS.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ViewClaims()
+        public async Task<IActionResult> TrackClaims()
         {
             var userId = HttpContext.Session.GetString("UserId");
 
@@ -65,11 +63,29 @@ namespace CMCS.Controllers
                 return RedirectToAction("Login", "Account");
             }
 
+            // Fetch claims for the logged-in user
             var claims = await _tableService.GetClaimsByUserAsync(userId);
-            return View(claims);
+
+            // Return the "TrackClaims" view
+            return View("TrackClaims", claims);
         }
 
-        // New action to view a single document
+        [HttpGet]
+        public async Task<IActionResult> ViewClaims()
+        {
+            var role = HttpContext.Session.GetString("Role");
+
+            // Check if the user is a lecturer
+            if (role == null || role != "Lecturer") // Adjust based on how you're storing roles (e.g., exact case of "Lecturer")
+            {
+                return RedirectToAction("TrackClaims"); // Redirect to user's own claims if they are not a lecturer
+            }
+
+            // Get all claims since the user is a lecturer
+            var allClaims = await _tableService.GetAllClaimsAsync();
+            return View("ViewClaims", allClaims);
+        }
+
         [HttpGet]
         public IActionResult ViewDocument(string fileUrl)
         {

@@ -38,3 +38,4 @@ C:\Users\yusuf\source\repos\CMCS\CMCS\obj\Debug\net8.0\refint\CMCS.dll
 C:\Users\yusuf\source\repos\CMCS\CMCS\obj\Debug\net8.0\CMCS.pdb
 C:\Users\yusuf\source\repos\CMCS\CMCS\obj\Debug\net8.0\CMCS.genruntimeconfig.cache
 C:\Users\yusuf\source\repos\CMCS\CMCS\obj\Debug\net8.0\ref\CMCS.dll
+C:\Users\yusuf\source\repos\CMCS\CMCS\obj\Debug\net8.0\CMCS.sourcelink.json

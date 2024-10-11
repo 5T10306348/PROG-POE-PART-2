@@ -1,9 +1,5 @@
 ﻿using Azure.Data.Tables;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Azure;
 
 public class TableService
 {
@@ -55,16 +51,16 @@ public class TableService
         }
     }
 
-    public async Task<TableEntity> GetUserByEmailAsync(string email)
+    public async Task<UserEntity> GetUserByEmailAsync(string email)
     {
         try
         {
-            var query = _userTableClient.Query<TableEntity>(entity => entity.PartitionKey == email);
-            return query.FirstOrDefault();
+            var queryResult = await _userTableClient.GetEntityAsync<UserEntity>("User", email); // Assuming 'User' is the PartitionKey
+            return queryResult.Value;
         }
-        catch (Exception ex)
+        catch (RequestFailedException)
         {
-            _logger.LogError(ex, "Error retrieving user.");
+            // Return null if user not found
             return null;
         }
     }
@@ -74,12 +70,12 @@ public class TableService
         try
         {
             var claimEntity = new TableEntity(userId, Guid.NewGuid().ToString())
-        {
-            { "HoursWorked", hoursWorked },
-            { "HourlyRate", hourlyRate },
-            { "ExtraNotes", extraNotes },
-            { "FileUrls", fileUrls } // Store the file URLs as a comma-separated string
-        };
+            {
+                { "HoursWorked", hoursWorked },
+                { "HourlyRate", hourlyRate },
+                { "ExtraNotes", extraNotes },
+                { "FileUrls", fileUrls } // Store the file URLs as a comma-separated string
+            };
             await _claimsTableClient.AddEntityAsync(claimEntity);
             _logger.LogInformation("Claim submitted successfully.");
         }
@@ -91,15 +87,67 @@ public class TableService
 
     public async Task<List<TableEntity>> GetClaimsByUserAsync(string userId)
     {
+        var claims = new List<TableEntity>();
+
         try
         {
-            var query = _claimsTableClient.Query<TableEntity>(entity => entity.PartitionKey == userId);
-            return query.ToList();
+            var query = _claimsTableClient.QueryAsync<TableEntity>(claim => claim.PartitionKey == userId);
+
+            await foreach (var claim in query)
+            {
+                claims.Add(claim);
+            }
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error retrieving claims.");
-            return new List<TableEntity>();
+            _logger.LogError(ex, "Error retrieving claims for user: {UserId}", userId);
+        }
+
+        return claims;
+    }
+
+    // Get all claims (for Lecturer/Admin)
+    public async Task<List<TableEntity>> GetAllClaimsAsync()
+    {
+        var allClaims = new List<TableEntity>();
+
+        try
+        {
+            var query = _claimsTableClient.QueryAsync<TableEntity>();
+
+            await foreach (var claim in query)
+            {
+                allClaims.Add(claim);
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error retrieving all claims");
+        }
+
+        return allClaims;
+    }
+
+    public async Task<bool> InsertUserAsync(UserEntity user)
+    {
+        try
+        {
+            // Check if the user already exists
+            var existingUser = await GetUserByEmailAsync(user.RowKey);
+            if (existingUser != null)
+            {
+                // User already exists
+                return false;
+            }
+
+            // Add the new user if it doesn't exist
+            await _userTableClient.AddEntityAsync(user);
+            return true;
+        }
+        catch (RequestFailedException ex)
+        {
+            // Handle other request failures
+            throw new Exception("User could not be added.", ex);
         }
     }
 }

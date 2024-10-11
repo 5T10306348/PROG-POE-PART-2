@@ -1,15 +1,27 @@
-﻿<form asp-action="Register" method="post">
+﻿@model RegisterViewModel
+
+<h2>Register</h2>
+
+<form asp-action="Register" method="post">
     <div class="form-group">
-        <label>Email</label>
-        <input type="email" name="Email" class="form-control" />
+        <label for="FullName">Full Name</label>
+        <input type="text" class="form-control" id="FullName" name="FullName" asp-for="FullName" required />
+        <span asp-validation-for="FullName" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label>Password</label>
-        <input type="password" name="Password" class="form-control" />
+        <label for="Email">Email</label>
+        <input type="email" class="form-control" id="Email" name="Email" asp-for="Email" required />
+        <span asp-validation-for="Email" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label>Confirm Password</label>
-        <input type="password" name="ConfirmPassword" class="form-control" />
+        <label for="Password">Password</label>
+        <input type="password" class="form-control" id="Password" name="Password" asp-for="Password" required />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label for="ConfirmPassword">Confirm Password</label>
+        <input type="password" class="form-control" id="ConfirmPassword" name="ConfirmPassword" asp-for="ConfirmPassword" required />
+        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
     </div>
     <button type="submit" class="btn btn-primary">Register</button>
 </form>
