@@ -1,0 +1,381 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\yusuf\\source\\repos\\CMCS\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{BB4D36C4-168A-4E37-B922-27186E9E72E7}|CMCS\\CMCS.csproj|c:\\users\\yusuf\\source\\repos\\cmcs\\cmcs\\views\\claims\\viewclaims.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{BB4D36C4-168A-4E37-B922-27186E9E72E7}|CMCS\\CMCS.csproj|solutionrelative:cmcs\\views\\claims\\viewclaims.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BB4D36C4-168A-4E37-B922-27186E9E72E7}|CMCS\\CMCS.csproj|c:\\users\\yusuf\\source\\repos\\cmcs\\cmcs\\controllers\\claimscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BB4D36C4-168A-4E37-B922-27186E9E72E7}|CMCS\\CMCS.csproj|solutionrelative:cmcs\\controllers\\claimscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BB4D36C4-168A-4E37-B922-27186E9E72E7}|CMCS\\CMCS.csproj|c:\\users\\yusuf\\source\\repos\\cmcs\\cmcs\\views\\claims\\submitclaim.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{BB4D36C4-168A-4E37-B922-27186E9E72E7}|CMCS\\CMCS.csproj|solutionrelative:cmcs\\views\\claims\\submitclaim.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BB4D36C4-168A-4E37-B922-27186E9E72E7}|CMCS\\CMCS.csproj|c:\\users\\yusuf\\source\\repos\\cmcs\\cmcs\\services\\fileservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BB4D36C4-168A-4E37-B922-27186E9E72E7}|CMCS\\CMCS.csproj|solutionrelative:cmcs\\services\\fileservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BB4D36C4-168A-4E37-B922-27186E9E72E7}|CMCS\\CMCS.csproj|c:\\users\\yusuf\\source\\repos\\cmcs\\cmcs\\services\\tableservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BB4D36C4-168A-4E37-B922-27186E9E72E7}|CMCS\\CMCS.csproj|solutionrelative:cmcs\\services\\tableservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BB4D36C4-168A-4E37-B922-27186E9E72E7}|CMCS\\CMCS.csproj|c:\\users\\yusuf\\source\\repos\\cmcs\\cmcs\\views\\claims\\viewdocument.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{BB4D36C4-168A-4E37-B922-27186E9E72E7}|CMCS\\CMCS.csproj|solutionrelative:cmcs\\views\\claims\\viewdocument.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BB4D36C4-168A-4E37-B922-27186E9E72E7}|CMCS\\CMCS.csproj|c:\\users\\yusuf\\source\\repos\\cmcs\\cmcs\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{BB4D36C4-168A-4E37-B922-27186E9E72E7}|CMCS\\CMCS.csproj|solutionrelative:cmcs\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BB4D36C4-168A-4E37-B922-27186E9E72E7}|CMCS\\CMCS.csproj|c:\\users\\yusuf\\source\\repos\\cmcs\\cmcs\\views\\shared\\_validationscriptspartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{BB4D36C4-168A-4E37-B922-27186E9E72E7}|CMCS\\CMCS.csproj|solutionrelative:cmcs\\views\\shared\\_validationscriptspartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BB4D36C4-168A-4E37-B922-27186E9E72E7}|CMCS\\CMCS.csproj|c:\\users\\yusuf\\source\\repos\\cmcs\\cmcs\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BB4D36C4-168A-4E37-B922-27186E9E72E7}|CMCS\\CMCS.csproj|solutionrelative:cmcs\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BB4D36C4-168A-4E37-B922-27186E9E72E7}|CMCS\\CMCS.csproj|c:\\users\\yusuf\\source\\repos\\cmcs\\cmcs\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{BB4D36C4-168A-4E37-B922-27186E9E72E7}|CMCS\\CMCS.csproj|solutionrelative:cmcs\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BB4D36C4-168A-4E37-B922-27186E9E72E7}|CMCS\\CMCS.csproj|c:\\users\\yusuf\\source\\repos\\cmcs\\cmcs\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{BB4D36C4-168A-4E37-B922-27186E9E72E7}|CMCS\\CMCS.csproj|solutionrelative:cmcs\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BB4D36C4-168A-4E37-B922-27186E9E72E7}|CMCS\\CMCS.csproj|c:\\users\\yusuf\\source\\repos\\cmcs\\cmcs\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BB4D36C4-168A-4E37-B922-27186E9E72E7}|CMCS\\CMCS.csproj|solutionrelative:cmcs\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BB4D36C4-168A-4E37-B922-27186E9E72E7}|CMCS\\CMCS.csproj|c:\\users\\yusuf\\source\\repos\\cmcs\\cmcs\\views\\account\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{BB4D36C4-168A-4E37-B922-27186E9E72E7}|CMCS\\CMCS.csproj|solutionrelative:cmcs\\views\\account\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BB4D36C4-168A-4E37-B922-27186E9E72E7}|CMCS\\CMCS.csproj|c:\\users\\yusuf\\source\\repos\\cmcs\\cmcs\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{BB4D36C4-168A-4E37-B922-27186E9E72E7}|CMCS\\CMCS.csproj|solutionrelative:cmcs\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BB4D36C4-168A-4E37-B922-27186E9E72E7}|CMCS\\CMCS.csproj|c:\\users\\yusuf\\source\\repos\\cmcs\\cmcs\\models\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BB4D36C4-168A-4E37-B922-27186E9E72E7}|CMCS\\CMCS.csproj|solutionrelative:cmcs\\models\\loginviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BB4D36C4-168A-4E37-B922-27186E9E72E7}|CMCS\\CMCS.csproj|c:\\users\\yusuf\\source\\repos\\cmcs\\cmcs\\models\\registerviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BB4D36C4-168A-4E37-B922-27186E9E72E7}|CMCS\\CMCS.csproj|solutionrelative:cmcs\\models\\registerviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BB4D36C4-168A-4E37-B922-27186E9E72E7}|CMCS\\CMCS.csproj|c:\\users\\yusuf\\source\\repos\\cmcs\\cmcs\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BB4D36C4-168A-4E37-B922-27186E9E72E7}|CMCS\\CMCS.csproj|solutionrelative:cmcs\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BB4D36C4-168A-4E37-B922-27186E9E72E7}|CMCS\\CMCS.csproj|c:\\users\\yusuf\\source\\repos\\cmcs\\cmcs\\models\\userentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BB4D36C4-168A-4E37-B922-27186E9E72E7}|CMCS\\CMCS.csproj|solutionrelative:cmcs\\models\\userentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BB4D36C4-168A-4E37-B922-27186E9E72E7}|CMCS\\CMCS.csproj|c:\\users\\yusuf\\source\\repos\\cmcs\\cmcs\\models\\claimentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BB4D36C4-168A-4E37-B922-27186E9E72E7}|CMCS\\CMCS.csproj|solutionrelative:cmcs\\models\\claimentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BB4D36C4-168A-4E37-B922-27186E9E72E7}|CMCS\\CMCS.csproj|c:\\users\\yusuf\\source\\repos\\cmcs\\cmcs\\models\\claimmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BB4D36C4-168A-4E37-B922-27186E9E72E7}|CMCS\\CMCS.csproj|solutionrelative:cmcs\\models\\claimmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BB4D36C4-168A-4E37-B922-27186E9E72E7}|CMCS\\CMCS.csproj|c:\\users\\yusuf\\source\\repos\\cmcs\\cmcs\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{BB4D36C4-168A-4E37-B922-27186E9E72E7}|CMCS\\CMCS.csproj|solutionrelative:cmcs\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ViewDocument.cshtml",
+              "DocumentMoniker": "C:\\Users\\yusuf\\source\\repos\\CMCS\\CMCS\\Views\\Claims\\ViewDocument.cshtml",
+              "RelativeDocumentMoniker": "CMCS\\Views\\Claims\\ViewDocument.cshtml",
+              "ToolTip": "C:\\Users\\yusuf\\source\\repos\\CMCS\\CMCS\\Views\\Claims\\ViewDocument.cshtml",
+              "RelativeToolTip": "CMCS\\Views\\Claims\\ViewDocument.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-11T16:41:24.647Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "SubmitClaim.cshtml",
+              "DocumentMoniker": "C:\\Users\\yusuf\\source\\repos\\CMCS\\CMCS\\Views\\Claims\\SubmitClaim.cshtml",
+              "RelativeDocumentMoniker": "CMCS\\Views\\Claims\\SubmitClaim.cshtml",
+              "ToolTip": "C:\\Users\\yusuf\\source\\repos\\CMCS\\CMCS\\Views\\Claims\\SubmitClaim.cshtml",
+              "RelativeToolTip": "CMCS\\Views\\Claims\\SubmitClaim.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABcAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-11T15:18:19.054Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\yusuf\\source\\repos\\CMCS\\CMCS\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "CMCS\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\yusuf\\source\\repos\\CMCS\\CMCS\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "CMCS\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAA3AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-11T15:20:12.137Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ViewClaims.cshtml",
+              "DocumentMoniker": "C:\\Users\\yusuf\\source\\repos\\CMCS\\CMCS\\Views\\Claims\\ViewClaims.cshtml",
+              "RelativeDocumentMoniker": "CMCS\\Views\\Claims\\ViewClaims.cshtml",
+              "ToolTip": "C:\\Users\\yusuf\\source\\repos\\CMCS\\CMCS\\Views\\Claims\\ViewClaims.cshtml",
+              "RelativeToolTip": "CMCS\\Views\\Claims\\ViewClaims.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAGQAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-11T15:19:07.704Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "FileService.cs",
+              "DocumentMoniker": "C:\\Users\\yusuf\\source\\repos\\CMCS\\CMCS\\Services\\FileService.cs",
+              "RelativeDocumentMoniker": "CMCS\\Services\\FileService.cs",
+              "ToolTip": "C:\\Users\\yusuf\\source\\repos\\CMCS\\CMCS\\Services\\FileService.cs",
+              "RelativeToolTip": "CMCS\\Services\\FileService.cs",
+              "ViewState": "AQIAACUAAAAAAAAAAADwv0AAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-11T15:08:01.886Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ClaimsController.cs",
+              "DocumentMoniker": "C:\\Users\\yusuf\\source\\repos\\CMCS\\CMCS\\Controllers\\ClaimsController.cs",
+              "RelativeDocumentMoniker": "CMCS\\Controllers\\ClaimsController.cs",
+              "ToolTip": "C:\\Users\\yusuf\\source\\repos\\CMCS\\CMCS\\Controllers\\ClaimsController.cs",
+              "RelativeToolTip": "CMCS\\Controllers\\ClaimsController.cs",
+              "ViewState": "AQIAAB4AAAAAAAAAAAAIwDcAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-11T15:17:34.717Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "TableService.cs",
+              "DocumentMoniker": "C:\\Users\\yusuf\\source\\repos\\CMCS\\CMCS\\Services\\TableService.cs",
+              "RelativeDocumentMoniker": "CMCS\\Services\\TableService.cs",
+              "ToolTip": "C:\\Users\\yusuf\\source\\repos\\CMCS\\CMCS\\Services\\TableService.cs",
+              "RelativeToolTip": "CMCS\\Services\\TableService.cs",
+              "ViewState": "AQIAAEMAAAAAAAAAAADwv1kAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-11T15:07:20.283Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "UserEntity.cs",
+              "DocumentMoniker": "C:\\Users\\yusuf\\source\\repos\\CMCS\\CMCS\\Models\\UserEntity.cs",
+              "RelativeDocumentMoniker": "CMCS\\Models\\UserEntity.cs",
+              "ToolTip": "C:\\Users\\yusuf\\source\\repos\\CMCS\\CMCS\\Models\\UserEntity.cs",
+              "RelativeToolTip": "CMCS\\Models\\UserEntity.cs",
+              "ViewState": "AQIAAAUAAAAAAAAAAAAAwBQAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-11T15:56:57.714Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "UserService.cs",
+              "DocumentMoniker": "C:\\Users\\yusuf\\source\\repos\\CMCS\\CMCS\\Services\\UserService.cs",
+              "RelativeDocumentMoniker": "CMCS\\Services\\UserService.cs",
+              "ToolTip": "C:\\Users\\yusuf\\source\\repos\\CMCS\\CMCS\\Services\\UserService.cs",
+              "RelativeToolTip": "CMCS\\Services\\UserService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-11T15:57:33.252Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "C:\\Users\\yusuf\\source\\repos\\CMCS\\CMCS\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "CMCS\\Controllers\\AccountController.cs",
+              "ToolTip": "C:\\Users\\yusuf\\source\\repos\\CMCS\\CMCS\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "CMCS\\Controllers\\AccountController.cs",
+              "ViewState": "AQIAABoAAAAAAAAAAAAwwDsAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-11T16:02:54.507Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "_ValidationScriptsPartial.cshtml",
+              "DocumentMoniker": "C:\\Users\\yusuf\\source\\repos\\CMCS\\CMCS\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "RelativeDocumentMoniker": "CMCS\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "ToolTip": "C:\\Users\\yusuf\\source\\repos\\CMCS\\CMCS\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "RelativeToolTip": "CMCS\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-11T16:21:10.682Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Register.cshtml",
+              "DocumentMoniker": "C:\\Users\\yusuf\\source\\repos\\CMCS\\CMCS\\Views\\Account\\Register.cshtml",
+              "RelativeDocumentMoniker": "CMCS\\Views\\Account\\Register.cshtml",
+              "ToolTip": "C:\\Users\\yusuf\\source\\repos\\CMCS\\CMCS\\Views\\Account\\Register.cshtml",
+              "RelativeToolTip": "CMCS\\Views\\Account\\Register.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-11T16:03:37.146Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "_ViewImports.cshtml",
+              "DocumentMoniker": "C:\\Users\\yusuf\\source\\repos\\CMCS\\CMCS\\Views\\_ViewImports.cshtml",
+              "RelativeDocumentMoniker": "CMCS\\Views\\_ViewImports.cshtml",
+              "ToolTip": "C:\\Users\\yusuf\\source\\repos\\CMCS\\CMCS\\Views\\_ViewImports.cshtml",
+              "RelativeToolTip": "CMCS\\Views\\_ViewImports.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-11T16:11:36.366Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "_ViewStart.cshtml",
+              "DocumentMoniker": "C:\\Users\\yusuf\\source\\repos\\CMCS\\CMCS\\Views\\_ViewStart.cshtml",
+              "RelativeDocumentMoniker": "CMCS\\Views\\_ViewStart.cshtml",
+              "ToolTip": "C:\\Users\\yusuf\\source\\repos\\CMCS\\CMCS\\Views\\_ViewStart.cshtml",
+              "RelativeToolTip": "CMCS\\Views\\_ViewStart.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-11T16:11:34.399Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\yusuf\\source\\repos\\CMCS\\CMCS\\Program.cs",
+              "RelativeDocumentMoniker": "CMCS\\Program.cs",
+              "ToolTip": "C:\\Users\\yusuf\\source\\repos\\CMCS\\CMCS\\Program.cs",
+              "RelativeToolTip": "CMCS\\Program.cs",
+              "ViewState": "AQIAACoAAAAAAAAAAAAIwDYAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-11T15:19:26.556Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "C:\\Users\\yusuf\\source\\repos\\CMCS\\CMCS\\Views\\Account\\Login.cshtml",
+              "RelativeDocumentMoniker": "CMCS\\Views\\Account\\Login.cshtml",
+              "ToolTip": "C:\\Users\\yusuf\\source\\repos\\CMCS\\CMCS\\Views\\Account\\Login.cshtml",
+              "RelativeToolTip": "CMCS\\Views\\Account\\Login.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-10-11T16:04:00.18Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "RegisterViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\yusuf\\source\\repos\\CMCS\\CMCS\\Models\\RegisterViewModel.cs",
+              "RelativeDocumentMoniker": "CMCS\\Models\\RegisterViewModel.cs",
+              "ToolTip": "C:\\Users\\yusuf\\source\\repos\\CMCS\\CMCS\\Models\\RegisterViewModel.cs",
+              "RelativeToolTip": "CMCS\\Models\\RegisterViewModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABcAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-11T16:07:02.924Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "LoginViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\yusuf\\source\\repos\\CMCS\\CMCS\\Models\\LoginViewModel.cs",
+              "RelativeDocumentMoniker": "CMCS\\Models\\LoginViewModel.cs",
+              "ToolTip": "C:\\Users\\yusuf\\source\\repos\\CMCS\\CMCS\\Models\\LoginViewModel.cs",
+              "RelativeToolTip": "CMCS\\Models\\LoginViewModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-11T16:07:20.175Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "ClaimEntity.cs",
+              "DocumentMoniker": "C:\\Users\\yusuf\\source\\repos\\CMCS\\CMCS\\Models\\ClaimEntity.cs",
+              "RelativeDocumentMoniker": "CMCS\\Models\\ClaimEntity.cs",
+              "ToolTip": "C:\\Users\\yusuf\\source\\repos\\CMCS\\CMCS\\Models\\ClaimEntity.cs",
+              "RelativeToolTip": "CMCS\\Models\\ClaimEntity.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAA1wBsAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-11T15:16:40.213Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "ClaimModel.cs",
+              "DocumentMoniker": "C:\\Users\\yusuf\\source\\repos\\CMCS\\CMCS\\Models\\ClaimModel.cs",
+              "RelativeDocumentMoniker": "CMCS\\Models\\ClaimModel.cs",
+              "ToolTip": "C:\\Users\\yusuf\\source\\repos\\CMCS\\CMCS\\Models\\ClaimModel.cs",
+              "RelativeToolTip": "CMCS\\Models\\ClaimModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-11T15:17:11.247Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\yusuf\\source\\repos\\CMCS\\CMCS\\appsettings.json",
+              "RelativeDocumentMoniker": "CMCS\\appsettings.json",
+              "ToolTip": "C:\\Users\\yusuf\\source\\repos\\CMCS\\CMCS\\appsettings.json",
+              "RelativeToolTip": "CMCS\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-10-11T15:10:37.519Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

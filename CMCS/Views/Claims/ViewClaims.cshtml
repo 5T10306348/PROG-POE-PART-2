@@ -1,0 +1,100 @@
+﻿@model List<Azure.Data.Tables.TableEntity>
+
+<h2>Your Submitted Claims</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Hours Worked</th>
+            <th>Hourly Rate</th>
+            <th>Total Amount</th>
+            <th>Extra Notes</th>
+            <th>Supporting Documents</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var claim in Model)
+        {
+            <tr>
+                <td>@claim["HoursWorked"]</td>
+                <td>@claim["HourlyRate"]</td>
+                <td>@(Convert.ToDouble(claim["HoursWorked"]) * Convert.ToDouble(claim["HourlyRate"]))</td>
+                <td>@claim["ExtraNotes"]</td>
+
+                <!-- Supporting Documents -->
+                <td>
+                    @if (claim.ContainsKey("FileUrls") && !string.IsNullOrEmpty(claim["FileUrls"].ToString()))
+                    {
+                        var files = claim["FileUrls"].ToString().Split(',');
+
+                        @if (files.Length == 1)
+                        {
+                            var fileData = files[0].Split('|');
+
+                            <!-- Single file, button says "View Supporting Documents" -->
+                            @if (fileData.Length == 2)
+                            {
+                                <form asp-controller="Claims" asp-action="ViewDocument" method="get">
+                                    <input type="hidden" name="fileUrl" value="@fileData[1]" />
+                                    <button type="submit" class="btn btn-primary">View Supporting Document</button>
+                                </form>
+                            }
+                            else
+                            {
+                                <p>Error: Invalid file data</p>
+                            }
+                        }
+                        else
+                        {
+                            <!-- Multiple files, button says "View Supporting Documents" -->
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#fileModal-@claim.RowKey">
+                                View Supporting Documents
+                            </button>
+
+                            <!-- Modal for file selection -->
+                            <div class="modal fade" id="fileModal-@claim.RowKey" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Select a Document to View</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            @foreach (var file in files)
+                                            {
+                                                var fileData = file.Split('|');
+
+                                                <!-- Ensure fileData has both file name and URL -->
+                                                @if (fileData.Length == 2)
+                                                {
+                                                    <form asp-controller="Claims" asp-action="ViewDocument" method="get">
+                                                        <input type="hidden" name="fileUrl" value="@fileData[1]" />
+                                                        <button type="submit" class="btn btn-link">@fileData[0]</button> <!-- File name displayed in modal -->
+                                                    </form>
+                                                }
+                                                else
+                                                {
+                                                    <p>Error: Invalid file data</p>
+                                                }
+                                            }
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <p>No Supporting Documents</p>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Include Bootstrap JS for modal functionality -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
