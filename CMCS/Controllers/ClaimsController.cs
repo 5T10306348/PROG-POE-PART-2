@@ -75,15 +75,15 @@ namespace CMCS.Controllers
         {
             var role = HttpContext.Session.GetString("Role");
 
-            // Check if the user is a lecturer
-            if (role == null || role != "Lecturer") // Adjust based on how you're storing roles (e.g., exact case of "Lecturer")
+            // Only ProgrammeCoordinator and AcademicManager can access this page
+            if (role == "ProgrammeCoordinator" || role == "AcademicManager")
             {
-                return RedirectToAction("TrackClaims"); // Redirect to user's own claims if they are not a lecturer
+                var allClaims = await _tableService.GetAllClaimsAsync();
+                return View("ViewClaims", allClaims);
             }
 
-            // Get all claims since the user is a lecturer
-            var allClaims = await _tableService.GetAllClaimsAsync();
-            return View("ViewClaims", allClaims);
+            // If the user is not an admin, redirect to their own claims page
+            return RedirectToAction("TrackClaims");
         }
 
         [HttpGet]

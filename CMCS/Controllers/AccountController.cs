@@ -33,7 +33,7 @@ namespace CMCS.Controllers
                 var hashedPassword = HashPassword(model.Password); // Hash the password
 
                 // Create a new user entity, including the full name
-                var userEntity = new UserEntity(model.Email, "User", model.FullName)
+                var userEntity = new UserEntity(model.Email, "Lecturer", model.FullName)
                 {
                     PasswordHash = hashedPassword,
                 };
@@ -49,11 +49,8 @@ namespace CMCS.Controllers
                         return View(model);
                     }
 
-                    // Store the user's full name in the session
-                    HttpContext.Session.SetString("FullName", model.FullName);
-                    HttpContext.Session.SetString("UserId", model.Email);
-
-                    return RedirectToAction("Index", "Home");
+                    // Don't log the user in automatically. Redirect to login page instead.
+                    return RedirectToAction("Login", "Account");
                 }
                 catch (Exception ex)
                 {
@@ -79,17 +76,48 @@ namespace CMCS.Controllers
                 // Retrieve the user from Azure Table by email (RowKey)
                 var userEntity = await _tableService.GetUserByEmailAsync(model.Email);
 
-                if (userEntity != null && VerifyPassword(model.Password, userEntity.PasswordHash))
+                if (userEntity != null)
                 {
-                    // Store the user's full name, email, and role in the session
-                    HttpContext.Session.SetString("FullName", userEntity.FullName);
-                    HttpContext.Session.SetString("UserId", model.Email);
-                    HttpContext.Session.SetString("Role", userEntity.PartitionKey); // Assuming PartitionKey stores the role
+                    // Check if the user is either Programme Coordinator or Academic Manager
+                    if (userEntity.PartitionKey == "ProgrammeCoordinator" || userEntity.PartitionKey == "AcademicManager")
+                    {
+                        // Skip hashing for admins and check if the password is the plain-text password
+                        if (model.Password == userEntity.PasswordHash) // Compare directly
+                        {
+                            // Store the user's full name, email, and role in the session
+                            HttpContext.Session.SetString("FullName", userEntity.FullName);
+                            HttpContext.Session.SetString("UserId", model.Email);
+                            HttpContext.Session.SetString("Role", userEntity.PartitionKey); // Store role in session
 
-                    return RedirectToAction("Index", "Home");
+                            return RedirectToAction("Index", "Home");
+                        }
+                        else
+                        {
+                            ModelState.AddModelError(string.Empty, "Invalid login attempt for admin.");
+                        }
+                    }
+                    else
+                    {
+                        // For non-admin users, hash the password and verify
+                        if (VerifyPassword(model.Password, userEntity.PasswordHash))
+                        {
+                            // Store the user's full name, email, and role in the session
+                            HttpContext.Session.SetString("FullName", userEntity.FullName);
+                            HttpContext.Session.SetString("UserId", model.Email);
+                            HttpContext.Session.SetString("Role", userEntity.PartitionKey); // Store role in session correctly
+
+                            return RedirectToAction("Index", "Home");
+                        }
+                        else
+                        {
+                            ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                        }
+                    }
                 }
-
-                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "User not found.");
+                }
             }
 
             return View(model);

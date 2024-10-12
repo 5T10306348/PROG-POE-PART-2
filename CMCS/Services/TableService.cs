@@ -1,5 +1,7 @@
 ﻿using Azure.Data.Tables;
 using Azure;
+using System.Text;
+using System.Security.Cryptography;
 
 public class TableService
 {
@@ -51,19 +53,26 @@ public class TableService
         }
     }
 
-    public async Task<UserEntity> GetUserByEmailAsync(string email)
+   public async Task<UserEntity> GetUserByEmailAsync(string email)
+{
+    try
     {
-        try
+        // Query the table to get the user by email (RowKey)
+        var queryResult = _userTableClient.Query<UserEntity>(u => u.RowKey == email).FirstOrDefault();
+
+        if (queryResult != null)
         {
-            var queryResult = await _userTableClient.GetEntityAsync<UserEntity>("User", email); // Assuming 'User' is the PartitionKey
-            return queryResult.Value;
+            return queryResult;
         }
-        catch (RequestFailedException)
-        {
-            // Return null if user not found
-            return null;
-        }
+
+        return null; // Return null if the user is not found
     }
+    catch (RequestFailedException ex)
+    {
+        _logger.LogError(ex, "Error retrieving user by email.");
+        return null;
+    }
+}
 
     public async Task SubmitClaimAsync(string userId, double hoursWorked, double hourlyRate, string extraNotes, string fileUrls)
     {
@@ -150,4 +159,31 @@ public class TableService
             throw new Exception("User could not be added.", ex);
         }
     }
+
+    public async Task RegisterAdminsAsync()
+    {
+        try
+        {
+            // Programme Coordinator
+            var programmeCoordinator = new UserEntity("programmecoordinator@gmail.com", "ProgrammeCoordinator", "Programme Coordinator")
+            {
+                PasswordHash = "password123" // Store plain-text password
+            };
+            await _userTableClient.AddEntityAsync(programmeCoordinator);
+
+            // Academic Manager
+            var academicManager = new UserEntity("academicmanager@gmail.com", "AcademicManager", "Academic Manager")
+            {
+                PasswordHash = "password123" // Store plain-text password
+            };
+            await _userTableClient.AddEntityAsync(academicManager);
+
+            _logger.LogInformation("Admins registered successfully.");
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error registering admins.");
+        }
+    }
+
 }

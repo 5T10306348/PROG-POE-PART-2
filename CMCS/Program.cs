@@ -1,11 +1,12 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 
 namespace CMCS
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args) // Make the method async
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -26,6 +27,13 @@ namespace CMCS
             builder.Services.AddSingleton<FileService>();
 
             var app = builder.Build();
+
+            // Ensure admins are registered
+            using (var scope = app.Services.CreateScope())
+            {
+                var tableService = scope.ServiceProvider.GetRequiredService<TableService>();
+                await tableService.RegisterAdminsAsync(); // Register ProgrammeCoordinator and AcademicManager
+            }
 
             // Configure the HTTP request pipeline
             if (!app.Environment.IsDevelopment())

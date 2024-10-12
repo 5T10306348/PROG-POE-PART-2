@@ -33,9 +33,15 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Claims" asp-action="SubmitClaim">Submit Claim</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Claims" asp-action="ViewClaims">View All Claims</a>
-                            </li>
+
+                            <!-- Only show View All Claims tab if the user is NOT a Lecturer -->
+                            @if (Context.Session.GetString("Role") != "Lecturer")
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Claims" asp-action="ViewClaims">View All Claims</a>
+                                </li>
+                            }
+
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Claims" asp-action="TrackClaims">Track My Claims</a>
                             </li>
@@ -78,7 +84,9 @@
             </div>
         </nav>
     </header>
-    <div class="container">
+
+  
+
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
