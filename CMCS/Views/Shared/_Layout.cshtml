@@ -12,6 +12,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
+                <!-- Kept container-fluid for full-width navbar -->
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">CMCS</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -30,10 +31,12 @@
                         <!-- Check if the UserId is stored in the session -->
                         @if (Context.Session.GetString("UserId") != null)
                         {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Claims" asp-action="SubmitClaim">Submit Claim</a>
-                            </li>
-
+                            @if (Context.Session.GetString("Role") == "Lecturer")
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Claims" asp-action="SubmitClaim">Submit Claim</a>
+                                </li>
+                            }
                             <!-- Only show View All Claims tab if the user is NOT a Lecturer -->
                             @if (Context.Session.GetString("Role") != "Lecturer")
                             {
@@ -41,14 +44,13 @@
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Claims" asp-action="ViewClaims">View All Claims</a>
                                 </li>
                             }
-
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Claims" asp-action="TrackClaims">Track My Claims</a>
-                            </li>
-
-                            <!-- Show the Lecturer tab if the user has the Lecturer role -->
                             @if (Context.Session.GetString("Role") == "Lecturer")
                             {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Claims" asp-action="TrackClaims">Track My Claims</a>
+                                </li>
+
+                                <!-- Show the Lecturer tab if the user has the Lecturer role -->
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Lecturer" asp-action="Dashboard">Lecturer Dashboard</a>
                                 </li>
@@ -85,18 +87,20 @@
         </nav>
     </header>
 
-  
-
+    <!-- Main content wrapped in container to prevent edge-to-edge layout -->
+    <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
+    <!-- Footer wrapped in container to keep it aligned with main content -->
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2024 - CMCS - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

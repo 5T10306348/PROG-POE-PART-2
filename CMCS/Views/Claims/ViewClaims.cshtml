@@ -1,13 +1,17 @@
 ﻿@model List<Azure.Data.Tables.TableEntity>
 
-<h2>Your Submitted Claims</h2>
+<h2>All Submitted Claims</h2>
 
-<table class="table">
+<table class="table table-striped">
     <thead>
         <tr>
+            <th>Claim ID</th>
+            <th>Lecturer Name</th>
+            <th>Email</th>
             <th>Hours Worked</th>
             <th>Hourly Rate</th>
             <th>Total Amount</th>
+            <th>Claim Date</th>
             <th>Extra Notes</th>
             <th>Supporting Documents</th>
         </tr>
@@ -16,9 +20,13 @@
         @foreach (var claim in Model)
         {
             <tr>
+                <td>@claim.RowKey</td> <!-- Display Claim ID -->
+                <td>@claim["FullName"]</td> <!-- Display Full Name -->
+                <td>@claim.PartitionKey</td> <!-- Display Email -->
                 <td>@claim["HoursWorked"]</td>
                 <td>@claim["HourlyRate"]</td>
-                <td>@(Convert.ToDouble(claim["HoursWorked"]) * Convert.ToDouble(claim["HourlyRate"]))</td>
+                <td>@(Convert.ToDouble(claim["HoursWorked"]) * Convert.ToDouble(claim["HourlyRate"]))</td> <!-- Total Amount -->
+                <td>@claim["SubmissionTime"]</td> <!-- Submission Time -->
                 <td>@claim["ExtraNotes"]</td>
 
                 <!-- Supporting Documents -->

@@ -74,17 +74,20 @@ public class TableService
     }
 }
 
-    public async Task SubmitClaimAsync(string userId, double hoursWorked, double hourlyRate, string extraNotes, string fileUrls)
+    public async Task SubmitClaimAsync(string userId, double hoursWorked, double hourlyRate, string extraNotes, string fileUrls, string fullName)
     {
         try
         {
             var claimEntity = new TableEntity(userId, Guid.NewGuid().ToString())
-            {
-                { "HoursWorked", hoursWorked },
-                { "HourlyRate", hourlyRate },
-                { "ExtraNotes", extraNotes },
-                { "FileUrls", fileUrls } // Store the file URLs as a comma-separated string
-            };
+        {
+            { "HoursWorked", hoursWorked },
+            { "HourlyRate", hourlyRate },
+            { "ExtraNotes", extraNotes },
+            { "FileUrls", fileUrls }, // Store the file URLs as a comma-separated string
+            { "FullName", fullName }, // Store the full name of the user who submitted the claim
+            { "Email", userId }, // Store the user's email (RowKey)
+            { "SubmissionTime", DateTimeOffset.UtcNow.ToString() } // Store the submission time
+        };
             await _claimsTableClient.AddEntityAsync(claimEntity);
             _logger.LogInformation("Claim submitted successfully.");
         }

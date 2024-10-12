@@ -27,6 +27,7 @@ namespace CMCS.Controllers
         public async Task<IActionResult> SubmitClaim(ClaimModel model, List<IFormFile> UploadedFiles)
         {
             var userId = HttpContext.Session.GetString("UserId");
+            var fullName = HttpContext.Session.GetString("FullName");
 
             if (userId == null)
             {
@@ -43,11 +44,11 @@ namespace CMCS.Controllers
                     fileData.Add($"{fileName}|{fileUrl}"); // Store fileName|fileUrl format
                 }
 
-                await _tableService.SubmitClaimAsync(userId, model.HoursWorked, model.HourlyRate, model.ExtraNotes, string.Join(",", fileData));
+                await _tableService.SubmitClaimAsync(userId, model.HoursWorked, model.HourlyRate, model.ExtraNotes, string.Join(",", fileData), fullName);
             }
             else
             {
-                await _tableService.SubmitClaimAsync(userId, model.HoursWorked, model.HourlyRate, model.ExtraNotes, null);
+                await _tableService.SubmitClaimAsync(userId, model.HoursWorked, model.HourlyRate, model.ExtraNotes, null, fullName);
             }
 
             return RedirectToAction("ViewClaims");
@@ -66,7 +67,17 @@ namespace CMCS.Controllers
             // Fetch claims for the logged-in user
             var claims = await _tableService.GetClaimsByUserAsync(userId);
 
-            // Return the "TrackClaims" view
+            // Convert submission time from UTC to South African time for each claim
+            foreach (var claim in claims)
+            {
+                if (claim.ContainsKey("SubmissionTime"))
+                {
+                    DateTimeOffset submissionTime = DateTimeOffset.Parse(claim["SubmissionTime"].ToString());
+                    TimeZoneInfo southAfricaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("South Africa Standard Time");
+                    claim["SubmissionTime"] = TimeZoneInfo.ConvertTime(submissionTime, southAfricaTimeZone).ToString("dd/MM/yyyy HH:mm");
+                }
+            }
+
             return View("TrackClaims", claims);
         }
 
@@ -79,6 +90,19 @@ namespace CMCS.Controllers
             if (role == "ProgrammeCoordinator" || role == "AcademicManager")
             {
                 var allClaims = await _tableService.GetAllClaimsAsync();
+
+                // Convert submission time from UTC to South African time for each claim
+                TimeZoneInfo southAfricaTimeZone = TimeZoneInfo.FindSystemTimeZoneById("South Africa Standard Time");
+
+                foreach (var claim in allClaims)
+                {
+                    if (claim.ContainsKey("SubmissionTime"))
+                    {
+                        DateTimeOffset submissionTime = DateTimeOffset.Parse(claim["SubmissionTime"].ToString());
+                        claim["SubmissionTime"] = TimeZoneInfo.ConvertTime(submissionTime, southAfricaTimeZone).ToString("dd/MM/yyyy HH:mm");
+                    }
+                }
+
                 return View("ViewClaims", allClaims);
             }
 
@@ -91,5 +115,7 @@ namespace CMCS.Controllers
         {
             return View((object)fileUrl);
         }
+
+
     }
 }

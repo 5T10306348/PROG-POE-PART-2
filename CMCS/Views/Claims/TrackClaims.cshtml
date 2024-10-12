@@ -17,7 +17,7 @@
             <tr>
                 <td>@claim.RowKey</td> <!-- Assuming RowKey is the Claim ID -->
                 <!-- Format Timestamp without time and timezone -->
-                <td>@((DateTimeOffset)claim.Timestamp)</td> <!-- Format as "dd/MM/yyyy" -->
+                <td>@claim["SubmissionTime"]</td> <!-- Format as "dd/MM/yyyy" -->
 
                 <td>R@(Convert.ToDouble(claim["HoursWorked"]) * Convert.ToDouble(claim["HourlyRate"]))</td> <!-- Total claim amount -->
                 <td>
