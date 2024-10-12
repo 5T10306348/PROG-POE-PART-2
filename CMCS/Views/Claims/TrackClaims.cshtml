@@ -16,13 +16,27 @@
         {
             <tr>
                 <td>@claim.RowKey</td> <!-- Assuming RowKey is the Claim ID -->
-                <!-- Format Timestamp without time and timezone -->
-                <td>@claim["SubmissionTime"]</td> <!-- Format as "dd/MM/yyyy" -->
+                <td>@claim["SubmissionTime"]</td> <!-- Claim Date -->
 
-                <td>R@(Convert.ToDouble(claim["HoursWorked"]) * Convert.ToDouble(claim["HourlyRate"]))</td> <!-- Total claim amount -->
+                <td>R@(Convert.ToDouble(claim["HoursWorked"]) * Convert.ToDouble(claim["HourlyRate"]))</td> <!-- Total Claim -->
+
                 <td>
-                    <!-- Placeholder button for claim status -->
-                    <button class="btn btn-secondary">Pending</button> <!-- Placeholder for claim status -->
+                    @if (claim.ContainsKey("Status"))
+                    {
+                        @if (claim["Status"].ToString() == "Approved")
+                        {
+                            <button class="btn btn-success">Approved</button>
+                        }
+                        else if (claim["Status"].ToString() == "Denied")
+                        {
+                            <button class="btn btn-danger">Rejected</button>
+                        }
+                    }
+                    else
+                    {
+                        <!-- Default to Pending -->
+                        <button class="btn btn-secondary">Pending</button>
+                    }
                 </td>
             </tr>
         }

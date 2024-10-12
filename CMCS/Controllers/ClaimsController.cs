@@ -115,7 +115,55 @@ namespace CMCS.Controllers
         {
             return View((object)fileUrl);
         }
+        [HttpPost]
+        public async Task<IActionResult> ApproveClaim(string claimId)
+        {
+            var role = HttpContext.Session.GetString("Role");
 
+            // Ensure only admins can approve/deny claims
+            if (role == "ProgrammeCoordinator" || role == "AcademicManager")
+            {
+                await _tableService.UpdateClaimStatusAsync(claimId, "Approved");
+            }
 
+            return RedirectToAction("ViewClaims");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DenyClaim(string claimId)
+        {
+            var role = HttpContext.Session.GetString("Role");
+
+            // Ensure only admins can approve/deny claims
+            if (role == "ProgrammeCoordinator" || role == "AcademicManager")
+            {
+                await _tableService.UpdateClaimStatusAsync(claimId, "Denied");
+            }
+
+            return RedirectToAction("ViewClaims");
+        }
+        [HttpPost]
+        public async Task<IActionResult> UpdateClaimStatus(string claimId, string status)
+        {
+            var role = HttpContext.Session.GetString("Role");
+
+            // Only ProgrammeCoordinator and AcademicManager can update claim statuses
+            if (role == "ProgrammeCoordinator" || role == "AcademicManager")
+            {
+                // Fetch the claim by ID (RowKey)
+                var claim = await _tableService.GetClaimByIdAsync(claimId);
+
+                if (claim != null)
+                {
+                    // Update the claim status
+                    claim["Status"] = status;
+
+                    // Save the updated claim back to the Azure Table
+                    await _tableService.UpdateClaimAsync(claim);
+                }
+            }
+
+            return RedirectToAction("ViewClaims");
+        }
     }
 }

@@ -14,19 +14,20 @@
             <th>Claim Date</th>
             <th>Extra Notes</th>
             <th>Supporting Documents</th>
+            <th>Actions</th> <!-- New column for actions -->
         </tr>
     </thead>
     <tbody>
         @foreach (var claim in Model)
         {
             <tr>
-                <td>@claim.RowKey</td> <!-- Display Claim ID -->
-                <td>@claim["FullName"]</td> <!-- Display Full Name -->
-                <td>@claim.PartitionKey</td> <!-- Display Email -->
+                <td>@claim.RowKey</td> <!-- Claim ID -->
+                <td>@claim["FullName"]</td> <!-- Lecturer Name -->
+                <td>@claim.PartitionKey</td> <!-- Email -->
                 <td>@claim["HoursWorked"]</td>
                 <td>@claim["HourlyRate"]</td>
-                <td>@(Convert.ToDouble(claim["HoursWorked"]) * Convert.ToDouble(claim["HourlyRate"]))</td> <!-- Total Amount -->
-                <td>@claim["SubmissionTime"]</td> <!-- Submission Time -->
+                <td>R@(Convert.ToDouble(claim["HoursWorked"]) * Convert.ToDouble(claim["HourlyRate"]))</td> <!-- Total Amount -->
+                <td>@claim["SubmissionTime"]</td> <!-- Claim Date -->
                 <td>@claim["ExtraNotes"]</td>
 
                 <!-- Supporting Documents -->
@@ -39,7 +40,6 @@
                         {
                             var fileData = files[0].Split('|');
 
-                            <!-- Single file, button says "View Supporting Documents" -->
                             @if (fileData.Length == 2)
                             {
                                 <form asp-controller="Claims" asp-action="ViewDocument" method="get">
@@ -54,12 +54,10 @@
                         }
                         else
                         {
-                            <!-- Multiple files, button says "View Supporting Documents" -->
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#fileModal-@claim.RowKey">
                                 View Supporting Documents
                             </button>
 
-                            <!-- Modal for file selection -->
                             <div class="modal fade" id="fileModal-@claim.RowKey" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -72,12 +70,11 @@
                                             {
                                                 var fileData = file.Split('|');
 
-                                                <!-- Ensure fileData has both file name and URL -->
                                                 @if (fileData.Length == 2)
                                                 {
                                                     <form asp-controller="Claims" asp-action="ViewDocument" method="get">
                                                         <input type="hidden" name="fileUrl" value="@fileData[1]" />
-                                                        <button type="submit" class="btn btn-link">@fileData[0]</button> <!-- File name displayed in modal -->
+                                                        <button type="submit" class="btn btn-link">@fileData[0]</button>
                                                     </form>
                                                 }
                                                 else
@@ -97,6 +94,30 @@
                     else
                     {
                         <p>No Supporting Documents</p>
+                    }
+                </td>
+
+                <!-- Actions for Approve/Deny -->
+                <td>
+                    @if (!claim.ContainsKey("Status"))
+                    {
+                        <form method="post" asp-controller="Claims" asp-action="UpdateClaimStatus">
+                            <input type="hidden" name="claimId" value="@claim.RowKey" />
+                            <button type="submit" name="status" value="Approved" class="btn btn-success">Approve</button>
+                            <button type="submit" name="status" value="Reject" class="btn btn-danger">Reject</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <!-- If already decided, no buttons -->
+                        @if (claim["Status"].ToString() == "Approved")
+                        {
+                            <span class="text-success">Approved</span>
+                        }
+                        else if (claim["Status"].ToString() == "Denied")
+                        {
+                            <span class="text-danger">Rejected</span>
+                        }
                     }
                 </td>
             </tr>

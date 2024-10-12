@@ -187,6 +187,63 @@ public class TableService
         {
             _logger.LogError(ex, "Error registering admins.");
         }
+
+
+    }
+    // Add a method to update the claim status
+    public async Task UpdateClaimStatusAsync(string claimId, string status)
+    {
+        try
+        {
+            // Retrieve the claim entity by its RowKey (claimId)
+            var claimEntity = await _claimsTableClient.GetEntityAsync<TableEntity>(claimId, claimId);
+
+            if (claimEntity != null)
+            {
+                // Update the claim status
+                claimEntity.Value["Status"] = status;
+                await _claimsTableClient.UpdateEntityAsync(claimEntity.Value, claimEntity.Value.ETag, TableUpdateMode.Replace);
+                _logger.LogInformation($"Claim {claimId} status updated to {status}.");
+            }
+        }
+        catch (RequestFailedException ex)
+        {
+            _logger.LogError(ex, $"Error updating claim {claimId} status.");
+        }
+    }
+    public async Task UpdateClaimAsync(TableEntity claim)
+    {
+        try
+        {
+            // Update the claim entity in the Azure Table
+            await _claimsTableClient.UpdateEntityAsync(claim, ETag.All, TableUpdateMode.Replace);
+            _logger.LogInformation("Claim status updated successfully.");
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error updating claim status.");
+        }
     }
 
+    public async Task<TableEntity> GetClaimByIdAsync(string claimId)
+    {
+        try
+        {
+            // Query the table to retrieve the claim by RowKey (which is the claim ID)
+            var query = _claimsTableClient.QueryAsync<TableEntity>(claim => claim.RowKey == claimId);
+
+            // Get the first matching result (should only be one since RowKey is unique)
+            await foreach (var claim in query)
+            {
+                return claim;
+            }
+
+            return null; // If no matching claim found, return null
+        }
+        catch (RequestFailedException ex)
+        {
+            _logger.LogError(ex, "Error retrieving claim by ID.");
+            return null;
+        }
+    }
 }
