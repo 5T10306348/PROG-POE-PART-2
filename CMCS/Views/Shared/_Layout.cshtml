@@ -60,11 +60,18 @@
 
                     <!-- Right-aligned Welcome/Logout or Login/Register -->
                     <ul class="navbar-nav ms-auto">
-                        <!-- If user is logged in, show welcome and logout -->
+                        <!-- If user is logged in, show welcome, profile picture, profile link and logout -->
                         @if (Context.Session.GetString("UserId") != null)
                         {
                             <li class="nav-item">
-                                <span class="nav-link">Welcome back, @Context.Session.GetString("FullName")!</span>
+                                <span class="nav-link">
+                                    <!-- Display profile picture -->
+                                    <img src="~/path/to/default/profile/picture.png" class="profile-pic" alt="Profile Picture" />
+                                    Welcome back, @Context.Session.GetString("FullName")!
+                                </span>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Profile">My Profile</a>
                             </li>
                             <li class="nav-item">
                                 <form asp-controller="Account" asp-action="Logout" method="post" class="form-inline">

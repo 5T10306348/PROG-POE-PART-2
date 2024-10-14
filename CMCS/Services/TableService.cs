@@ -246,4 +246,15 @@ public class TableService
             return null;
         }
     }
+    public async Task UpdateUserAsync(UserEntity user)
+    {
+        try
+        {
+            await _userTableClient.UpdateEntityAsync(user, ETag.All, TableUpdateMode.Replace);
+        }
+        catch (RequestFailedException ex)
+        {
+            _logger.LogError(ex, "Error updating user.");
+        }
+    }
 }

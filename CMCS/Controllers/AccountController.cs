@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using System.Security.Cryptography;
 using System.Text;
-using Microsoft.AspNetCore.Identity;
 using Azure;
 using System.Diagnostics;
 
@@ -13,10 +12,12 @@ namespace CMCS.Controllers
     public class AccountController : Controller
     {
         private readonly TableService _tableService;
+        private readonly FileService _fileService;
 
-        public AccountController(TableService tableService)
+        public AccountController(TableService tableService, FileService fileService)
         {
             _tableService = tableService;
+            _fileService = fileService;
         }
 
         [HttpGet]
@@ -160,6 +161,78 @@ namespace CMCS.Controllers
                 // Return an error page or message
                 return View("Error", new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
             }
+        }
+
+        // New Methods for Profile
+
+        [HttpGet]
+        public async Task<IActionResult> Profile()
+        {
+            var userId = HttpContext.Session.GetString("UserId");
+
+            if (userId == null)
+            {
+                return RedirectToAction("Login");
+            }
+
+            var userEntity = await _tableService.GetUserByEmailAsync(userId);
+            if (userEntity == null)
+            {
+                return RedirectToAction("Login");
+            }
+
+            var model = new ProfileViewModel
+            {
+                FullName = userEntity.FullName,
+                Email = userEntity.RowKey // RowKey stores the email
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateProfile(ProfileViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var userId = HttpContext.Session.GetString("UserId");
+
+                if (userId == null)
+                {
+                    return RedirectToAction("Login");
+                }
+
+                var userEntity = await _tableService.GetUserByEmailAsync(userId);
+                if (userEntity == null)
+                {
+                    return RedirectToAction("Login");
+                }
+
+                // Update user details
+                userEntity.FullName = model.FullName;
+                userEntity.RowKey = model.Email; // Update the email
+
+                if (!string.IsNullOrEmpty(model.Password))
+                {
+                    userEntity.PasswordHash = HashPassword(model.Password); // Update password if provided
+                }
+
+                if (model.ProfilePicture != null)
+                {
+                    var (fileName, fileUrl) = await _fileService.UploadFileAsync(model.ProfilePicture);
+                    userEntity.ProfilePictureUrl = fileUrl;
+                }
+
+                await _tableService.UpdateUserAsync(userEntity); // Save changes in Azure Table
+
+                // Update session with new data
+                HttpContext.Session.SetString("FullName", userEntity.FullName);
+                HttpContext.Session.SetString("UserId", userEntity.RowKey); // Update session with new email
+
+                return RedirectToAction("Index", "Home");
+            }
+
+            return View("Profile", model);
         }
     }
 }

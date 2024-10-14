@@ -7,6 +7,7 @@ public class UserEntity : ITableEntity
     public string RowKey { get; set; } // Email
     public string PasswordHash { get; set; }
     public string FullName { get; set; } // Add this for the user's full name
+    public string ProfilePictureUrl { get; set; }
 
     public ETag ETag { get; set; }
     public DateTimeOffset? Timestamp { get; set; }
