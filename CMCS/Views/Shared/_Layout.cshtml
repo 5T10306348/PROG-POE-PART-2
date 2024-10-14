@@ -65,11 +65,13 @@
                         {
                             <li class="nav-item">
                                 <span class="nav-link">
-                                    <!-- Display profile picture -->
-                                    <img src="~/path/to/default/profile/picture.png" class="profile-pic" alt="Profile Picture" />
+                                    <!-- Display profile picture, if available -->
+                                    <img src="@(Url.Content(Context.Session.GetString("ProfilePictureUrl") ?? "~/images/default-profile.jpg"))" class="profile-pic rounded-circle" width="30" height="30" alt="Profile Picture" />
                                     Welcome back, @Context.Session.GetString("FullName")!
                                 </span>
                             </li>
+                        
+
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Profile">My Profile</a>
                             </li>

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ZeVMSUpaQrt4ZeOA8OD+VnOzg7inSi4JvLbKnH+eJ8I=",
+  "Hash": "oPRY5jbfzb0iVUyyJfN5ye5dhNPX+7V1CqfKEHcXgQI=",
   "Source": "CMCS",
   "BasePath": "_content/CMCS",
   "Mode": "Default",
@@ -91,6 +91,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\yusuf\\source\\repos\\CMCS\\CMCS\\wwwroot\\images\\default-profile.jpg",
+      "SourceId": "CMCS",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\yusuf\\source\\repos\\CMCS\\CMCS\\wwwroot\\",
+      "BasePath": "_content/CMCS",
+      "RelativePath": "images/default-profile.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\default-profile.jpg"
     },
     {
       "Identity": "C:\\Users\\yusuf\\source\\repos\\CMCS\\CMCS\\wwwroot\\js\\site.js",

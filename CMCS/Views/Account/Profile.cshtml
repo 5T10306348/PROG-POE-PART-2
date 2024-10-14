@@ -1,30 +1,26 @@
-﻿@model CMCS.Models.ProfileViewModel
+﻿@model CMCS.Models.UserProfileViewModel
 
 <h2>My Profile</h2>
 
-<form asp-action="UpdateProfile" method="post" enctype="multipart/form-data">
-    <div class="form-group">
-        <label for="FullName">Full Name</label>
-        <input type="text" class="form-control" id="FullName" name="FullName" asp-for="FullName" />
-        <span asp-validation-for="FullName" class="text-danger"></span>
-    </div>
+<div>
+    <img src="@(Url.Content(Model.ProfilePictureUrl ?? "~/images/default-profile.jpg"))" alt="Profile Picture" width="100" height="100" />
+    <form asp-controller="Account" asp-action="UpdateProfilePicture" method="post" enctype="multipart/form-data">
+        <input type="file" name="profilePicture" id="profilePicture" class="form-control-file d-none" onchange="this.form.submit();" />
+        <label for="profilePicture" class="btn btn-primary mt-2">Update Image</label>
+    </form>
+</div>
 
+
+<form asp-controller="Account" asp-action="UpdateProfile" method="post">
     <div class="form-group">
+        <label for="FullName">Name</label>
+        <input type="text" class="form-control" id="FullName" name="FullName" value="@Model.FullName" required />
+    </div>
+    <div class="form-group mt-3">
         <label for="Email">Email</label>
-        <input type="email" class="form-control" id="Email" name="Email" asp-for="Email" />
-        <span asp-validation-for="Email" class="text-danger"></span>
+        <input type="email" class="form-control" id="Email" name="Email" value="@Model.Email" required />
     </div>
-
-    <div class="form-group">
-        <label for="Password">New Password</label>
-        <input type="password" class="form-control" id="Password" name="Password" asp-for="Password" />
-        <span asp-validation-for="Password" class="text-danger"></span>
+    <div class="text-center mt-4">
+        <button type="submit" class="btn btn-primary">Update</button>
     </div>
-
-    <div class="form-group">
-        <label for="ProfilePicture">Profile Picture</label>
-        <input type="file" class="form-control" id="ProfilePicture" name="ProfilePicture" />
-    </div>
-
-    <button type="submit" class="btn btn-primary">Update</button>
 </form>

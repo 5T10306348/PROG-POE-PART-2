@@ -252,9 +252,9 @@ public class TableService
         {
             await _userTableClient.UpdateEntityAsync(user, ETag.All, TableUpdateMode.Replace);
         }
-        catch (RequestFailedException ex)
+        catch (Exception ex)
         {
-            _logger.LogError(ex, "Error updating user.");
+            // Log and handle exceptions
         }
     }
 }

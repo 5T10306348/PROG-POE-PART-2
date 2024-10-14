@@ -164,7 +164,6 @@ namespace CMCS.Controllers
         }
 
         // New Methods for Profile
-
         [HttpGet]
         public async Task<IActionResult> Profile()
         {
@@ -172,67 +171,83 @@ namespace CMCS.Controllers
 
             if (userId == null)
             {
-                return RedirectToAction("Login");
+                return RedirectToAction("Login", "Account");
             }
 
-            var userEntity = await _tableService.GetUserByEmailAsync(userId);
-            if (userEntity == null)
-            {
-                return RedirectToAction("Login");
-            }
+            var user = await _tableService.GetUserByEmailAsync(userId);
 
-            var model = new ProfileViewModel
+            // Create a view model for the profile page
+            var model = new UserProfileViewModel
             {
-                FullName = userEntity.FullName,
-                Email = userEntity.RowKey // RowKey stores the email
+                FullName = user.FullName,
+                Email = user.RowKey, // RowKey represents the user's email
+                ProfilePictureUrl = !string.IsNullOrEmpty(user.ProfilePictureUrl)
+                    ? Url.Content(user.ProfilePictureUrl)
+                    : Url.Content("~/images/default-profile.jpg")
             };
 
             return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdateProfile(ProfileViewModel model)
+        public async Task<IActionResult> UpdateProfile(UserProfileViewModel model)
         {
-            if (ModelState.IsValid)
+            var userId = HttpContext.Session.GetString("UserId");
+
+            if (userId == null)
             {
-                var userId = HttpContext.Session.GetString("UserId");
-
-                if (userId == null)
-                {
-                    return RedirectToAction("Login");
-                }
-
-                var userEntity = await _tableService.GetUserByEmailAsync(userId);
-                if (userEntity == null)
-                {
-                    return RedirectToAction("Login");
-                }
-
-                // Update user details
-                userEntity.FullName = model.FullName;
-                userEntity.RowKey = model.Email; // Update the email
-
-                if (!string.IsNullOrEmpty(model.Password))
-                {
-                    userEntity.PasswordHash = HashPassword(model.Password); // Update password if provided
-                }
-
-                if (model.ProfilePicture != null)
-                {
-                    var (fileName, fileUrl) = await _fileService.UploadFileAsync(model.ProfilePicture);
-                    userEntity.ProfilePictureUrl = fileUrl;
-                }
-
-                await _tableService.UpdateUserAsync(userEntity); // Save changes in Azure Table
-
-                // Update session with new data
-                HttpContext.Session.SetString("FullName", userEntity.FullName);
-                HttpContext.Session.SetString("UserId", userEntity.RowKey); // Update session with new email
-
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Login", "Account");
             }
 
-            return View("Profile", model);
+            // Retrieve the user from the table
+            var user = await _tableService.GetUserByEmailAsync(userId);
+
+            // Update user's full name and email (RowKey)
+            user.FullName = model.FullName;
+            user.RowKey = model.Email;
+
+            // Update the user in the table storage
+            await _tableService.UpdateUserAsync(user);
+
+            // Update session information
+            HttpContext.Session.SetString("FullName", model.FullName);
+            HttpContext.Session.SetString("UserId", model.Email);
+
+            return RedirectToAction("Profile");
         }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateProfilePicture(IFormFile profilePicture)
+        {
+            var userId = HttpContext.Session.GetString("UserId");
+
+            if (userId == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            // Check if profile picture file is valid
+            if (profilePicture != null && profilePicture.Length > 0)
+            {
+                // Upload the profile picture and get the URL
+                var (fileName, fileUrl) = await _fileService.UploadFileAsync(profilePicture);
+
+                // Retrieve the user from the table
+                var user = await _tableService.GetUserByEmailAsync(userId);
+
+                // Set the profile picture URL
+                user.ProfilePictureUrl = fileUrl; // Use dot notation to assign the URL
+
+                // Update the user in the table storage
+                await _tableService.UpdateUserAsync(user);
+
+                // Update the session with the new profile picture URL
+                HttpContext.Session.SetString("ProfilePictureUrl", fileUrl);
+            }
+
+            return RedirectToAction("Profile");
+        }
+
     }
 }
+
